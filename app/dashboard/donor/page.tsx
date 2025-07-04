@@ -185,19 +185,22 @@ export default function DonorDashboard() {
     <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black text-white">
       {/* Header */}
       <header className="border-b border-gray-800 bg-black/50 backdrop-blur-md">
-        <div className="container mx-auto px-6 py-4 flex items-center justify-between">
-          <div className="flex items-center space-x-4">
-            <Link href="/" className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-lg flex items-center justify-center">
-                <Heart className="w-5 h-5 text-black" />
+        <div className="container mx-auto px-4 sm:px-6 py-4">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-4 sm:space-y-0">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center space-x-4">
+                <Link href="/" className="flex items-center space-x-2">
+                  <div className="w-8 h-8 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-lg flex items-center justify-center">
+                    <Heart className="w-5 h-5 text-black" />
+                  </div>
+                  <span className="text-xl font-bold bg-gradient-to-r from-yellow-400 to-yellow-600 bg-clip-text text-transparent">
+                    JUNKY
+                  </span>
+                </Link>
+                <Badge className="bg-blue-500/20 text-blue-400 border-blue-500/30">Donor Dashboard</Badge>
               </div>
-              <span className="text-xl font-bold bg-gradient-to-r from-yellow-400 to-yellow-600 bg-clip-text text-transparent">
-                JUNKY
-              </span>
-            </Link>
-            <Badge className="bg-blue-500/20 text-blue-400 border-blue-500/30">Donor Dashboard</Badge>
-          </div>
-          <div className="flex items-center space-x-4">
+            </div>
+            <div className="flex items-center space-x-2 sm:space-x-4">
             <Button variant="ghost" size="sm">
               <Bell className="w-4 h-4" />
             </Button>
@@ -217,11 +220,11 @@ export default function DonorDashboard() {
         </div>
       </header>
 
-      <div className="container mx-auto px-6 py-8">
+      <div className="container mx-auto px-4 sm:px-6 py-4 sm:py-8">
         {/* Welcome Section */}
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
-          <h1 className="text-3xl font-bold text-white mb-2">Welcome back, {user?.name?.split(" ")[0] || "Donor"}</h1>
-          <p className="text-gray-400">Continue making a difference in patients' lives through your generous support</p>
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-6 sm:mb-8">
+          <h1 className="text-2xl sm:text-3xl font-bold text-white mb-2">Welcome back, {user?.name?.split(" ")[0] || "Donor"}</h1>
+          <p className="text-gray-400 text-sm sm:text-base">Continue making a difference in patients' lives through your generous support</p>
         </motion.div>
 
         {/* Stats Cards */}
@@ -229,84 +232,84 @@ export default function DonorDashboard() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="grid md:grid-cols-4 gap-6 mb-8"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-6 sm:mb-8"
         >
-          <Card className="bg-gradient-to-br from-gray-900 to-gray-800 border-gray-700">
-            <CardContent className="p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-gray-400 text-sm">Total Donated</p>
-                  <p className="text-2xl font-bold text-white">${donorStats.totalDonated.toLocaleString()}</p>
+                      <Card className="bg-gradient-to-br from-gray-900 to-gray-800 border-gray-700">
+              <CardContent className="p-4 sm:p-6">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-gray-400 text-xs sm:text-sm">Total Donated</p>
+                    <p className="text-xl sm:text-2xl font-bold text-white">${donorStats.totalDonated.toLocaleString()}</p>
+                  </div>
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-green-500/20 rounded-lg flex items-center justify-center">
+                    <DollarSign className="w-5 h-5 sm:w-6 sm:h-6 text-green-400" />
+                  </div>
                 </div>
-                <div className="w-12 h-12 bg-green-500/20 rounded-lg flex items-center justify-center">
-                  <DollarSign className="w-6 h-6 text-green-400" />
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+              </CardContent>
+            </Card>
 
-          <Card className="bg-gradient-to-br from-gray-900 to-gray-800 border-gray-700">
-            <CardContent className="p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-gray-400 text-sm">Patients Helped</p>
-                  <p className="text-2xl font-bold text-white">{donorStats.patientsHelped}</p>
+            <Card className="bg-gradient-to-br from-gray-900 to-gray-800 border-gray-700">
+              <CardContent className="p-4 sm:p-6">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-gray-400 text-xs sm:text-sm">Patients Helped</p>
+                    <p className="text-xl sm:text-2xl font-bold text-white">{donorStats.patientsHelped}</p>
+                  </div>
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-blue-500/20 rounded-lg flex items-center justify-center">
+                    <Users className="w-5 h-5 sm:w-6 sm:h-6 text-blue-400" />
+                  </div>
                 </div>
-                <div className="w-12 h-12 bg-blue-500/20 rounded-lg flex items-center justify-center">
-                  <Users className="w-6 h-6 text-blue-400" />
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+              </CardContent>
+            </Card>
 
-          <Card className="bg-gradient-to-br from-gray-900 to-gray-800 border-gray-700">
-            <CardContent className="p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-gray-400 text-sm">Success Rate</p>
-                  <p className="text-2xl font-bold text-white">{donorStats.successRate}%</p>
+            <Card className="bg-gradient-to-br from-gray-900 to-gray-800 border-gray-700">
+              <CardContent className="p-4 sm:p-6">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-gray-400 text-xs sm:text-sm">Success Rate</p>
+                    <p className="text-xl sm:text-2xl font-bold text-white">{donorStats.successRate}%</p>
+                  </div>
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-yellow-500/20 rounded-lg flex items-center justify-center">
+                    <TrendingUp className="w-5 h-5 sm:w-6 sm:h-6 text-yellow-400" />
+                  </div>
                 </div>
-                <div className="w-12 h-12 bg-yellow-500/20 rounded-lg flex items-center justify-center">
-                  <TrendingUp className="w-6 h-6 text-yellow-400" />
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+              </CardContent>
+            </Card>
 
-          <Card className="bg-gradient-to-br from-gray-900 to-gray-800 border-gray-700">
-            <CardContent className="p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-gray-400 text-sm">Monthly Impact</p>
-                  <p className="text-2xl font-bold text-white">${donorStats.monthlyImpact.toLocaleString()}</p>
+            <Card className="bg-gradient-to-br from-gray-900 to-gray-800 border-gray-700">
+              <CardContent className="p-4 sm:p-6">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-gray-400 text-xs sm:text-sm">Monthly Impact</p>
+                    <p className="text-xl sm:text-2xl font-bold text-white">${donorStats.monthlyImpact.toLocaleString()}</p>
+                  </div>
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-purple-500/20 rounded-lg flex items-center justify-center">
+                    <Heart className="w-5 h-5 sm:w-6 sm:h-6 text-purple-400" />
+                  </div>
                 </div>
-                <div className="w-12 h-12 bg-purple-500/20 rounded-lg flex items-center justify-center">
-                  <Heart className="w-6 h-6 text-purple-400" />
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+              </CardContent>
+            </Card>
         </motion.div>
 
         {/* Main Content */}
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>
-          <Tabs defaultValue="discover" className="space-y-6">
-            <TabsList className="bg-gray-800 border-gray-700">
+          <Tabs defaultValue="discover" className="space-y-4 sm:space-y-6">
+            <TabsList className="bg-gray-800 border-gray-700 w-full sm:w-auto">
               <TabsTrigger
                 value="discover"
-                className="data-[state=active]:bg-yellow-400 data-[state=active]:text-black"
+                className="data-[state=active]:bg-yellow-400 data-[state=active]:text-black text-xs sm:text-sm"
               >
                 Discover Patients
               </TabsTrigger>
-              <TabsTrigger value="history" className="data-[state=active]:bg-yellow-400 data-[state=active]:text-black">
+              <TabsTrigger value="history" className="data-[state=active]:bg-yellow-400 data-[state=active]:text-black text-xs sm:text-sm">
                 Donation History
               </TabsTrigger>
-              <TabsTrigger value="impact" className="data-[state=active]:bg-yellow-400 data-[state=active]:text-black">
+              <TabsTrigger value="impact" className="data-[state=active]:bg-yellow-400 data-[state=active]:text-black text-xs sm:text-sm">
                 My Impact
               </TabsTrigger>
             </TabsList>
 
-            <TabsContent value="discover" className="space-y-6">
+            <TabsContent value="discover" className="space-y-4 sm:space-y-6">
               {/* Search and Filter */}
               <div className="flex flex-col sm:flex-row gap-4">
                 <div className="relative flex-1">
@@ -335,57 +338,57 @@ export default function DonorDashboard() {
               </div>
 
               {/* Patient Cases */}
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                 {filteredCases.map((case_) => (
                   <Card
                     key={case_._id}
                     className="bg-gradient-to-br from-gray-900 to-gray-800 border-gray-700 hover:border-yellow-400/50 transition-all duration-300"
                   >
-                    <CardContent className="p-6">
-                      <div className="flex items-start justify-between mb-4">
+                    <CardContent className="p-4 sm:p-6">
+                      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between space-y-3 sm:space-y-0 sm:mb-4">
                         <div className="flex items-center space-x-3">
-                          <div className="w-12 h-12 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-full flex items-center justify-center text-black font-bold">
+                          <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-full flex items-center justify-center text-black font-bold text-sm sm:text-base">
                             {case_.patient.name.charAt(0)}
                           </div>
                           <div>
-                            <h3 className="font-semibold text-white">{case_.patient.name}</h3>
-                            <p className="text-sm text-gray-400">{case_.patient.age} years old</p>
+                            <h3 className="font-semibold text-white text-sm sm:text-base">{case_.patient.name}</h3>
+                            <p className="text-xs sm:text-sm text-gray-400">{case_.patient.age} years old</p>
                           </div>
                         </div>
                         <Badge className={getUrgencyColor(case_.urgency)}>{case_.urgency.toUpperCase()}</Badge>
                       </div>
 
-                      <h4 className="text-lg font-semibold text-white mb-2">{case_.title}</h4>
-                      <p className="text-gray-300 text-sm mb-4 line-clamp-2">{case_.description}</p>
+                      <h4 className="text-base sm:text-lg font-semibold text-white mb-2">{case_.title}</h4>
+                      <p className="text-gray-300 text-xs sm:text-sm mb-4 line-clamp-2">{case_.description}</p>
 
                       <div className="mb-4">
-                        <div className="flex items-center justify-between text-sm text-gray-400 mb-2">
+                        <div className="flex items-center justify-between text-xs sm:text-sm text-gray-400 mb-2">
                           <span>Funding Progress</span>
                           <span>{Math.round((case_.raised / case_.amount) * 100)}%</span>
                         </div>
                         <Progress value={(case_.raised / case_.amount) * 100} className="h-2 bg-gray-700" />
-                        <div className="flex items-center justify-between text-sm mt-2">
+                        <div className="flex items-center justify-between text-xs sm:text-sm mt-2">
                           <span className="text-green-400">${case_.raised.toLocaleString()} raised</span>
                           <span className="text-gray-400">of ${case_.amount.toLocaleString()}</span>
                         </div>
                       </div>
 
-                      <div className="flex items-center justify-between mb-4">
-                        <div className="flex items-center text-sm text-gray-400">
-                          <MapPin className="w-4 h-4 mr-1" />
+                      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-2 sm:space-y-0 mb-4">
+                        <div className="flex items-center text-xs sm:text-sm text-gray-400">
+                          <MapPin className="w-3 h-3 sm:w-4 sm:h-4 mr-1" />
                           {case_.location}
                         </div>
                         <Badge className={getStatusColor(case_.status)}>{case_.status.toUpperCase()}</Badge>
                       </div>
 
-                      <div className="flex items-center space-x-2">
-                        <Button className="flex-1 bg-gradient-to-r from-yellow-400 to-yellow-600 text-black hover:from-yellow-500 hover:to-yellow-700">
+                      <div className="flex flex-col sm:flex-row sm:items-center space-y-2 sm:space-y-0 sm:space-x-2">
+                        <Button className="flex-1 bg-gradient-to-r from-yellow-400 to-yellow-600 text-black hover:from-yellow-500 hover:to-yellow-700 w-full sm:w-auto">
                           Donate Now
                         </Button>
                         <Button
                           variant="outline"
                           size="sm"
-                          className="border-gray-600 text-gray-300 hover:bg-gray-800 bg-transparent"
+                          className="border-gray-600 text-gray-300 hover:bg-gray-800 bg-transparent w-full sm:w-auto"
                         >
                           Details
                         </Button>

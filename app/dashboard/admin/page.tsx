@@ -253,43 +253,47 @@ export default function AdminDashboard() {
     <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black text-white">
       {/* Header */}
       <header className="border-b border-gray-800 bg-black/50 backdrop-blur-md">
-        <div className="container mx-auto px-6 py-4 flex items-center justify-between">
-          <div className="flex items-center space-x-4">
-            <Link href="/" className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-lg flex items-center justify-center">
-                <Shield className="w-5 h-5 text-black" />
+        <div className="container mx-auto px-4 sm:px-6 py-4">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-4 sm:space-y-0">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center space-x-4">
+                <Link href="/" className="flex items-center space-x-2">
+                  <div className="w-8 h-8 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-lg flex items-center justify-center">
+                    <Shield className="w-5 h-5 text-black" />
+                  </div>
+                  <span className="text-xl font-bold bg-gradient-to-r from-yellow-400 to-yellow-600 bg-clip-text text-transparent">
+                    JUNKY
+                  </span>
+                </Link>
+                <Badge className="bg-purple-500/20 text-purple-400 border-purple-500/30">Admin Dashboard</Badge>
               </div>
-              <span className="text-xl font-bold bg-gradient-to-r from-yellow-400 to-yellow-600 bg-clip-text text-transparent">
-                JUNKY
-              </span>
-            </Link>
-            <Badge className="bg-purple-500/20 text-purple-400 border-purple-500/30">Admin Dashboard</Badge>
-          </div>
-          <div className="flex items-center space-x-4">
-            <Button variant="ghost" size="sm">
-              <Bell className="w-4 h-4" />
-            </Button>
-            <Button variant="ghost" size="sm">
-              <Settings className="w-4 h-4" />
-            </Button>
-            <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-gradient-to-r from-purple-500 to-purple-600 rounded-full flex items-center justify-center">
-                <User className="w-4 h-4 text-white" />
-              </div>
-              <span className="text-sm text-gray-300">{user?.name || "Admin"}</span>
             </div>
-            <Button variant="ghost" size="sm" onClick={handleLogout}>
-              <LogOut className="w-4 h-4" />
-            </Button>
+            <div className="flex items-center space-x-2 sm:space-x-4">
+              <Button variant="ghost" size="sm" className="hidden sm:flex">
+                <Bell className="w-4 h-4" />
+              </Button>
+              <Button variant="ghost" size="sm" className="hidden sm:flex">
+                <Settings className="w-4 h-4" />
+              </Button>
+              <div className="flex items-center space-x-2">
+                <div className="w-8 h-8 bg-gradient-to-r from-purple-500 to-purple-600 rounded-full flex items-center justify-center">
+                  <User className="w-4 h-4 text-white" />
+                </div>
+                <span className="text-sm text-gray-300 hidden sm:block">{user?.name || "Admin"}</span>
+              </div>
+              <Button variant="ghost" size="sm" onClick={handleLogout}>
+                <LogOut className="w-4 h-4" />
+              </Button>
+            </div>
           </div>
         </div>
       </header>
 
-      <div className="container mx-auto px-6 py-8">
+      <div className="container mx-auto px-4 sm:px-6 py-4 sm:py-8">
         {/* Welcome Section */}
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
-          <h1 className="text-3xl font-bold text-white mb-2">System Administration</h1>
-          <p className="text-gray-400">Monitor platform performance and manage system operations</p>
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-6 sm:mb-8">
+          <h1 className="text-2xl sm:text-3xl font-bold text-white mb-2">System Administration</h1>
+          <p className="text-gray-400 text-sm sm:text-base">Monitor platform performance and manage system operations</p>
         </motion.div>
 
         {/* System Health */}
@@ -297,7 +301,7 @@ export default function AdminDashboard() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="mb-8"
+          className="mb-6 sm:mb-8"
         >
           <Card className="bg-gradient-to-br from-gray-900 to-gray-800 border-gray-700">
             <CardHeader>
@@ -308,22 +312,22 @@ export default function AdminDashboard() {
             </CardHeader>
             <CardContent>
               <div className="flex items-center justify-between mb-2">
-                <span className="text-gray-400">Overall System Status</span>
+                <span className="text-gray-400 text-sm sm:text-base">Overall System Status</span>
                 <span className="text-green-400 font-semibold">{systemStats.platformHealth}%</span>
               </div>
               <Progress value={systemStats.platformHealth} className="h-3 bg-gray-700" />
-              <div className="grid grid-cols-3 gap-4 mt-4">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-4">
                 <div className="text-center">
-                  <div className="text-green-400 font-semibold">API</div>
-                  <div className="text-sm text-gray-400">Operational</div>
+                  <div className="text-green-400 font-semibold text-sm sm:text-base">API</div>
+                  <div className="text-xs sm:text-sm text-gray-400">Operational</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-green-400 font-semibold">Database</div>
-                  <div className="text-sm text-gray-400">Healthy</div>
+                  <div className="text-green-400 font-semibold text-sm sm:text-base">Database</div>
+                  <div className="text-xs sm:text-sm text-gray-400">Healthy</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-green-400 font-semibold">Blockchain</div>
-                  <div className="text-sm text-gray-400">Synced</div>
+                  <div className="text-green-400 font-semibold text-sm sm:text-base">Blockchain</div>
+                  <div className="text-xs sm:text-sm text-gray-400">Synced</div>
                 </div>
               </div>
             </CardContent>
@@ -335,59 +339,59 @@ export default function AdminDashboard() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-6 sm:mb-8"
         >
           <Card className="bg-gradient-to-br from-gray-900 to-gray-800 border-gray-700">
-            <CardContent className="p-6">
+            <CardContent className="p-4 sm:p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-gray-400 text-sm">Total Users</p>
-                  <p className="text-2xl font-bold text-white">{systemStats.totalUsers.toLocaleString()}</p>
+                  <p className="text-gray-400 text-xs sm:text-sm">Total Users</p>
+                  <p className="text-xl sm:text-2xl font-bold text-white">{systemStats.totalUsers.toLocaleString()}</p>
                 </div>
-                <div className="w-12 h-12 bg-blue-500/20 rounded-lg flex items-center justify-center">
-                  <Users className="w-6 h-6 text-blue-400" />
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-blue-500/20 rounded-lg flex items-center justify-center">
+                  <Users className="w-5 h-5 sm:w-6 sm:h-6 text-blue-400" />
                 </div>
               </div>
             </CardContent>
           </Card>
 
           <Card className="bg-gradient-to-br from-gray-900 to-gray-800 border-gray-700">
-            <CardContent className="p-6">
+            <CardContent className="p-4 sm:p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-gray-400 text-sm">Partner Hospitals</p>
-                  <p className="text-2xl font-bold text-white">{systemStats.totalHospitals}</p>
+                  <p className="text-gray-400 text-xs sm:text-sm">Partner Hospitals</p>
+                  <p className="text-xl sm:text-2xl font-bold text-white">{systemStats.totalHospitals}</p>
                 </div>
-                <div className="w-12 h-12 bg-green-500/20 rounded-lg flex items-center justify-center">
-                  <Building2 className="w-6 h-6 text-green-400" />
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-green-500/20 rounded-lg flex items-center justify-center">
+                  <Building2 className="w-5 h-5 sm:w-6 sm:h-6 text-green-400" />
                 </div>
               </div>
             </CardContent>
           </Card>
 
           <Card className="bg-gradient-to-br from-gray-900 to-gray-800 border-gray-700">
-            <CardContent className="p-6">
+            <CardContent className="p-4 sm:p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-gray-400 text-sm">Total Funding</p>
-                  <p className="text-2xl font-bold text-white">${(systemStats.totalFunding / 1000000).toFixed(1)}M</p>
+                  <p className="text-gray-400 text-xs sm:text-sm">Total Funding</p>
+                  <p className="text-xl sm:text-2xl font-bold text-white">${(systemStats.totalFunding / 1000000).toFixed(1)}M</p>
                 </div>
-                <div className="w-12 h-12 bg-yellow-500/20 rounded-lg flex items-center justify-center">
-                  <DollarSign className="w-6 h-6 text-yellow-400" />
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-yellow-500/20 rounded-lg flex items-center justify-center">
+                  <DollarSign className="w-5 h-5 sm:w-6 sm:h-6 text-yellow-400" />
                 </div>
               </div>
             </CardContent>
           </Card>
 
           <Card className="bg-gradient-to-br from-gray-900 to-gray-800 border-gray-700">
-            <CardContent className="p-6">
+            <CardContent className="p-4 sm:p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-gray-400 text-sm">Success Rate</p>
-                  <p className="text-2xl font-bold text-white">{systemStats.successRate}%</p>
+                  <p className="text-gray-400 text-xs sm:text-sm">Success Rate</p>
+                  <p className="text-xl sm:text-2xl font-bold text-white">{systemStats.successRate}%</p>
                 </div>
-                <div className="w-12 h-12 bg-purple-500/20 rounded-lg flex items-center justify-center">
-                  <TrendingUp className="w-6 h-6 text-purple-400" />
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-purple-500/20 rounded-lg flex items-center justify-center">
+                  <TrendingUp className="w-5 h-5 sm:w-6 sm:h-6 text-purple-400" />
                 </div>
               </div>
             </CardContent>
@@ -396,7 +400,7 @@ export default function AdminDashboard() {
 
         {/* Main Content */}
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}>
-          <Tabs defaultValue="overview" className="space-y-6">
+          <Tabs defaultValue="overview" className="space-y-4 sm:space-y-6">
             <TabsList className="bg-gray-800 border-gray-700">
               <TabsTrigger value="overview" className="data-[state=active]:bg-yellow-400 data-[state=active]:text-black">
                 System Overview

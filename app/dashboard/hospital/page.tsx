@@ -182,19 +182,22 @@ export default function HospitalDashboard() {
     <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black text-white">
       {/* Header */}
       <header className="border-b border-gray-800 bg-black/50 backdrop-blur-md">
-        <div className="container mx-auto px-6 py-4 flex items-center justify-between">
-          <div className="flex items-center space-x-4">
-            <Link href="/" className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-lg flex items-center justify-center">
-                <Building2 className="w-5 h-5 text-black" />
+        <div className="container mx-auto px-4 sm:px-6 py-4">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-4 sm:space-y-0">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center space-x-4">
+                <Link href="/" className="flex items-center space-x-2">
+                  <div className="w-8 h-8 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-lg flex items-center justify-center">
+                    <Building2 className="w-5 h-5 text-black" />
+                  </div>
+                  <span className="text-xl font-bold bg-gradient-to-r from-yellow-400 to-yellow-600 bg-clip-text text-transparent">
+                    JUNKY
+                  </span>
+                </Link>
+                <Badge className="bg-green-500/20 text-green-400 border-green-500/30">Hospital Dashboard</Badge>
               </div>
-              <span className="text-xl font-bold bg-gradient-to-r from-yellow-400 to-yellow-600 bg-clip-text text-transparent">
-                JUNKY
-              </span>
-            </Link>
-            <Badge className="bg-green-500/20 text-green-400 border-green-500/30">Hospital Dashboard</Badge>
-          </div>
-          <div className="flex items-center space-x-4">
+            </div>
+            <div className="flex items-center space-x-2 sm:space-x-4">
             <Button variant="ghost" size="sm">
               <Bell className="w-4 h-4" />
             </Button>
@@ -214,11 +217,11 @@ export default function HospitalDashboard() {
         </div>
       </header>
 
-      <div className="container mx-auto px-6 py-8">
+      <div className="container mx-auto px-4 sm:px-6 py-4 sm:py-8">
         {/* Welcome Section */}
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
-          <h1 className="text-3xl font-bold text-white mb-2">Hospital Management Portal</h1>
-          <p className="text-gray-400">Verify patient applications and manage treatment funding</p>
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-6 sm:mb-8">
+          <h1 className="text-2xl sm:text-3xl font-bold text-white mb-2">Hospital Management Portal</h1>
+          <p className="text-gray-400 text-sm sm:text-base">Verify patient applications and manage treatment funding</p>
         </motion.div>
 
         {/* Stats Cards */}
@@ -226,59 +229,59 @@ export default function HospitalDashboard() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="grid md:grid-cols-4 gap-6 mb-8"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-6 sm:mb-8"
         >
           <Card className="bg-gradient-to-br from-gray-900 to-gray-800 border-gray-700">
-            <CardContent className="p-6">
+            <CardContent className="p-4 sm:p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-gray-400 text-sm">Pending Verifications</p>
-                  <p className="text-2xl font-bold text-white">{hospitalStats.pendingVerifications}</p>
+                  <p className="text-gray-400 text-xs sm:text-sm">Pending Verifications</p>
+                  <p className="text-xl sm:text-2xl font-bold text-white">{hospitalStats.pendingVerifications}</p>
                 </div>
-                <div className="w-12 h-12 bg-yellow-500/20 rounded-lg flex items-center justify-center">
-                  <Clock className="w-6 h-6 text-yellow-400" />
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-yellow-500/20 rounded-lg flex items-center justify-center">
+                  <Clock className="w-5 h-5 sm:w-6 sm:h-6 text-yellow-400" />
                 </div>
               </div>
             </CardContent>
           </Card>
 
           <Card className="bg-gradient-to-br from-gray-900 to-gray-800 border-gray-700">
-            <CardContent className="p-6">
+            <CardContent className="p-4 sm:p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-gray-400 text-sm">Verified Patients</p>
-                  <p className="text-2xl font-bold text-white">{hospitalStats.verifiedPatients}</p>
+                  <p className="text-gray-400 text-xs sm:text-sm">Verified Patients</p>
+                  <p className="text-xl sm:text-2xl font-bold text-white">{hospitalStats.verifiedPatients}</p>
                 </div>
-                <div className="w-12 h-12 bg-green-500/20 rounded-lg flex items-center justify-center">
-                  <CheckCircle className="w-6 h-6 text-green-400" />
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-green-500/20 rounded-lg flex items-center justify-center">
+                  <CheckCircle className="w-5 h-5 sm:w-6 sm:h-6 text-green-400" />
                 </div>
               </div>
             </CardContent>
           </Card>
 
           <Card className="bg-gradient-to-br from-gray-900 to-gray-800 border-gray-700">
-            <CardContent className="p-6">
+            <CardContent className="p-4 sm:p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-gray-400 text-sm">Total Funding</p>
-                  <p className="text-2xl font-bold text-white">${hospitalStats.totalFunding.toLocaleString()}</p>
+                  <p className="text-gray-400 text-xs sm:text-sm">Total Funding</p>
+                  <p className="text-xl sm:text-2xl font-bold text-white">${hospitalStats.totalFunding.toLocaleString()}</p>
                 </div>
-                <div className="w-12 h-12 bg-blue-500/20 rounded-lg flex items-center justify-center">
-                  <DollarSign className="w-6 h-6 text-blue-400" />
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-blue-500/20 rounded-lg flex items-center justify-center">
+                  <DollarSign className="w-5 h-5 sm:w-6 sm:h-6 text-blue-400" />
                 </div>
               </div>
             </CardContent>
           </Card>
 
           <Card className="bg-gradient-to-br from-gray-900 to-gray-800 border-gray-700">
-            <CardContent className="p-6">
+            <CardContent className="p-4 sm:p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-gray-400 text-sm">Successful Treatments</p>
-                  <p className="text-2xl font-bold text-white">{hospitalStats.successfulTreatments}</p>
+                  <p className="text-gray-400 text-xs sm:text-sm">Successful Treatments</p>
+                  <p className="text-xl sm:text-2xl font-bold text-white">{hospitalStats.successfulTreatments}</p>
                 </div>
-                <div className="w-12 h-12 bg-purple-500/20 rounded-lg flex items-center justify-center">
-                  <Users className="w-6 h-6 text-purple-400" />
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-purple-500/20 rounded-lg flex items-center justify-center">
+                  <Users className="w-5 h-5 sm:w-6 sm:h-6 text-purple-400" />
                 </div>
               </div>
             </CardContent>
@@ -287,29 +290,29 @@ export default function HospitalDashboard() {
 
         {/* Main Content */}
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>
-          <Tabs defaultValue="verifications" className="space-y-6">
-            <TabsList className="bg-gray-800 border-gray-700">
+          <Tabs defaultValue="verifications" className="space-y-4 sm:space-y-6">
+            <TabsList className="bg-gray-800 border-gray-700 w-full sm:w-auto">
               <TabsTrigger
                 value="verifications"
-                className="data-[state=active]:bg-yellow-400 data-[state=active]:text-black"
+                className="data-[state=active]:bg-yellow-400 data-[state=active]:text-black text-xs sm:text-sm"
               >
                 Patient Verifications
               </TabsTrigger>
               <TabsTrigger
                 value="treatments"
-                className="data-[state=active]:bg-yellow-400 data-[state=active]:text-black"
+                className="data-[state=active]:bg-yellow-400 data-[state=active]:text-black text-xs sm:text-sm"
               >
                 Active Treatments
               </TabsTrigger>
               <TabsTrigger
                 value="resources"
-                className="data-[state=active]:bg-yellow-400 data-[state=active]:text-black"
+                className="data-[state=active]:bg-yellow-400 data-[state=active]:text-black text-xs sm:text-sm"
               >
                 Resource Management
               </TabsTrigger>
             </TabsList>
 
-            <TabsContent value="verifications" className="space-y-6">
+            <TabsContent value="verifications" className="space-y-4 sm:space-y-6">
               {/* Search */}
               <div className="relative">
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
@@ -322,7 +325,7 @@ export default function HospitalDashboard() {
               </div>
 
               {/* Verification Queue */}
-              <div className="space-y-4">
+              <div className="space-y-3 sm:space-y-4">
                 {filteredVerifications.map((verification) => (
                   <Card key={verification._id} className="bg-gradient-to-br from-gray-900 to-gray-800 border-gray-700">
                     <CardContent className="p-6">
