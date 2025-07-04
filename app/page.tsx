@@ -20,34 +20,34 @@ export default function LandingPage() {
   if (!mounted) return null
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black text-white overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-50 text-gray-900 overflow-hidden">
       {/* Navigation */}
-      <nav className="fixed top-0 w-full z-50 bg-black/80 backdrop-blur-md border-b border-gray-800">
+      <nav className="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-md border-b border-blue-200 shadow-sm">
         <div className="container mx-auto px-6 py-4 flex items-center justify-between">
           <div className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-lg flex items-center justify-center">
-              <Heart className="w-5 h-5 text-black" />
+            <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-blue-700 rounded-lg flex items-center justify-center">
+              <Heart className="w-5 h-5 text-white" />
             </div>
-            <span className="text-2xl font-bold bg-gradient-to-r from-yellow-400 to-yellow-600 bg-clip-text text-transparent">
+            <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent">
               JUNKY
             </span>
           </div>
           <div className="hidden md:flex items-center space-x-8">
-            <a href="#how-it-works" className="text-gray-300 hover:text-yellow-400 transition-colors">
+            <a href="#how-it-works" className="text-gray-600 hover:text-blue-600 transition-colors">
               How It Works
             </a>
-            <a href="#impact" className="text-gray-300 hover:text-yellow-400 transition-colors">
+            <a href="#impact" className="text-gray-600 hover:text-blue-600 transition-colors">
               Impact
             </a>
-            <a href="#programs" className="text-gray-300 hover:text-yellow-400 transition-colors">
+            <a href="#programs" className="text-gray-600 hover:text-blue-600 transition-colors">
               Programs
             </a>
-            <a href="#case-studies" className="text-gray-300 hover:text-yellow-400 transition-colors">
+            <a href="#case-studies" className="text-gray-600 hover:text-blue-600 transition-colors">
               Case Studies
             </a>
           </div>
           <Link href="/auth">
-            <Button className="bg-gradient-to-r from-yellow-400 to-yellow-600 text-black hover:from-yellow-500 hover:to-yellow-700 font-semibold">
+            <Button className="bg-gradient-to-r from-blue-600 to-blue-700 text-white hover:from-blue-700 hover:to-blue-800 font-semibold">
               Get Started
             </Button>
           </Link>
@@ -56,20 +56,20 @@ export default function LandingPage() {
 
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        <motion.div className="absolute inset-0 bg-gradient-to-r from-yellow-400/10 to-transparent" style={{ y }} />
+        <motion.div className="absolute inset-0 bg-gradient-to-r from-blue-600/10 to-transparent" style={{ y }} />
         <div className="container mx-auto px-6 text-center relative z-10">
           <motion.div initial={{ opacity: 0, y: 50 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
-            <Badge className="mb-6 bg-yellow-400/20 text-yellow-400 border-yellow-400/30">
+            <Badge className="mb-6 bg-blue-600/20 text-blue-600 border-blue-600/30">
               AI-Powered Healthcare Funding
             </Badge>
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent">
+            <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-gray-900 via-gray-700 to-gray-600 bg-clip-text text-transparent">
               Get Medical Treatment
               <br />
-              <span className="bg-gradient-to-r from-yellow-400 to-yellow-600 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent">
                 Funded by Community
               </span>
             </h1>
-            <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-xl md:text-2xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
               Revolutionary blockchain platform connecting patients with donors through AI-powered assessment,
               transparent funding, and community governance.
             </p>
@@ -77,7 +77,7 @@ export default function LandingPage() {
               <Link href="/auth?role=patient">
                 <Button
                   size="lg"
-                  className="bg-gradient-to-r from-yellow-400 to-yellow-600 text-black hover:from-yellow-500 hover:to-yellow-700 font-semibold px-8 py-4 text-lg"
+                  className="bg-gradient-to-r from-blue-600 to-blue-700 text-white hover:from-blue-700 hover:to-blue-800 font-semibold px-8 py-4 text-lg"
                 >
                   Apply for Funding
                   <ArrowRight className="ml-2 w-5 h-5" />
@@ -87,7 +87,7 @@ export default function LandingPage() {
                 <Button
                   size="lg"
                   variant="outline"
-                  className="border-gray-600 text-white hover:bg-gray-800 px-8 py-4 text-lg bg-transparent"
+                  className="border-blue-600 text-blue-600 hover:bg-blue-50 px-8 py-4 text-lg bg-transparent"
                 >
                   Start Donating
                   <Heart className="ml-2 w-5 h-5" />
@@ -102,7 +102,7 @@ export default function LandingPage() {
           {[...Array(20)].map((_, i) => (
             <motion.div
               key={i}
-              className="absolute w-2 h-2 bg-yellow-400/30 rounded-full"
+              className="absolute w-2 h-2 bg-blue-600/30 rounded-full"
               style={{
                 left: `${Math.random() * 100}%`,
                 top: `${Math.random() * 100}%`,
@@ -122,7 +122,7 @@ export default function LandingPage() {
       </section>
 
       {/* Impact Stats */}
-      <section className="py-20 bg-gradient-to-r from-gray-900 to-black">
+      <section className="py-20 bg-gradient-to-r from-blue-600 to-blue-700">
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {[
@@ -138,11 +138,11 @@ export default function LandingPage() {
                 transition={{ delay: index * 0.1 }}
                 className="text-center"
               >
-                <div className="w-16 h-16 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <stat.icon className="w-8 h-8 text-black" />
+                <div className="w-16 h-16 bg-gradient-to-r from-yellow-400 to-yellow-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <stat.icon className="w-8 h-8 text-white" />
                 </div>
-                <div className="text-3xl md:text-4xl font-bold text-yellow-400 mb-2">{stat.number}</div>
-                <div className="text-gray-300">{stat.label}</div>
+                <div className="text-3xl md:text-4xl font-bold text-white mb-2">{stat.number}</div>
+                <div className="text-blue-100">{stat.label}</div>
               </motion.div>
             ))}
           </div>
@@ -150,13 +150,13 @@ export default function LandingPage() {
       </section>
 
       {/* How It Works */}
-      <section id="how-it-works" className="py-20 bg-black">
+      <section id="how-it-works" className="py-20 bg-white">
         <div className="container mx-auto px-6">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">
               How JUNKY Works
             </h2>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
               Our revolutionary 3-step process ensures transparent, efficient, and secure medical funding
             </p>
           </motion.div>
@@ -194,20 +194,20 @@ export default function LandingPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.2 }}
               >
-                <Card className="bg-gradient-to-br from-gray-900 to-gray-800 border-gray-700 h-full">
+                <Card className="bg-gradient-to-br from-blue-50 to-white border-blue-200 shadow-lg h-full">
                   <CardContent className="p-8">
                     <div className="flex items-center mb-6">
-                      <div className="text-6xl font-bold text-yellow-400/20 mr-4">{step.step}</div>
-                      <div className="w-12 h-12 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-lg flex items-center justify-center">
-                        <step.icon className="w-6 h-6 text-black" />
+                      <div className="text-6xl font-bold text-blue-600/20 mr-4">{step.step}</div>
+                      <div className="w-12 h-12 bg-gradient-to-r from-blue-600 to-blue-700 rounded-lg flex items-center justify-center">
+                        <step.icon className="w-6 h-6 text-white" />
                       </div>
                     </div>
-                    <h3 className="text-2xl font-bold text-white mb-4">{step.title}</h3>
-                    <p className="text-gray-300 mb-6">{step.description}</p>
+                    <h3 className="text-2xl font-bold text-gray-900 mb-4">{step.title}</h3>
+                    <p className="text-gray-600 mb-6">{step.description}</p>
                     <ul className="space-y-2">
                       {step.features.map((feature, i) => (
-                        <li key={i} className="flex items-center text-sm text-gray-400">
-                          <CheckCircle className="w-4 h-4 text-yellow-400 mr-2" />
+                        <li key={i} className="flex items-center text-sm text-gray-600">
+                          <CheckCircle className="w-4 h-4 text-blue-600 mr-2" />
                           {feature}
                         </li>
                       ))}

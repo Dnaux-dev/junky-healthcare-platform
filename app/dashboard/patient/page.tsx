@@ -199,14 +199,14 @@ export default function PatientDashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black text-white flex flex-col lg:flex-row">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-50 text-gray-900 flex flex-col lg:flex-row">
       {/* Sidebar - Hidden on mobile, shown on desktop */}
-      <div className="hidden lg:flex bg-gray-950 border-r border-gray-800 w-64 p-4 space-y-4 flex-col">
+      <div className="hidden lg:flex bg-white border-r border-blue-200 w-64 p-4 space-y-4 flex-col shadow-lg">
         <Link href="/" className="flex items-center space-x-2 mb-6">
-          <div className="w-8 h-8 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-lg flex items-center justify-center">
-            <Heart className="w-5 h-5 text-black" />
+          <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-blue-700 rounded-lg flex items-center justify-center">
+            <Heart className="w-5 h-5 text-white" />
           </div>
-          <span className="text-xl font-bold bg-gradient-to-r from-yellow-400 to-yellow-600 bg-clip-text text-transparent">
+          <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent">
             JUNKY
           </span>
         </Link>
@@ -232,20 +232,20 @@ export default function PatientDashboard() {
       {/* Main Content */}
       <div className="flex-1 flex flex-col">
         {/* Header */}
-        <header className="border-b border-gray-800 bg-black/50 backdrop-blur-md">
+        <header className="border-b border-blue-200 bg-white/95 backdrop-blur-md shadow-sm">
           <div className="container mx-auto px-4 sm:px-6 py-4">
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-4 sm:space-y-0">
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-4">
                   <Link href="/" className="flex items-center space-x-2 lg:hidden">
-                    <div className="w-8 h-8 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-lg flex items-center justify-center">
-                      <Heart className="w-5 h-5 text-black" />
+                    <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-blue-700 rounded-lg flex items-center justify-center">
+                      <Heart className="w-5 h-5 text-white" />
                     </div>
-                    <span className="text-xl font-bold bg-gradient-to-r from-yellow-400 to-yellow-600 bg-clip-text text-transparent">
+                    <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent">
                       JUNKY
                     </span>
                   </Link>
-                  <Badge className="bg-red-500/20 text-red-400 border-red-500/30">Patient Dashboard</Badge>
+                  <Badge className="bg-blue-600/20 text-blue-600 border-blue-600/30">Patient Dashboard</Badge>
                 </div>
                 <Button variant="ghost" size="sm" className="lg:hidden" onClick={() => setShowApplyModal(true)}>
                   <Plus className="w-4 h-4" />
@@ -259,10 +259,10 @@ export default function PatientDashboard() {
                   <Settings className="w-4 h-4" />
                 </Button>
                 <div className="flex items-center space-x-2">
-                  <div className="w-8 h-8 bg-gradient-to-r from-red-500 to-red-600 rounded-full flex items-center justify-center">
+                  <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-blue-700 rounded-full flex items-center justify-center">
                     <User className="w-4 h-4 text-white" />
                   </div>
-                  <span className="text-sm text-gray-300 hidden sm:block">{user?.name || "Patient"}</span>
+                  <span className="text-sm text-gray-600 hidden sm:block">{user?.name || "Patient"}</span>
                 </div>
                 <Button variant="ghost" size="sm" onClick={handleLogout}>
                   <LogOut className="w-4 h-4" />
@@ -275,8 +275,8 @@ export default function PatientDashboard() {
         <div className="container mx-auto px-4 sm:px-6 py-4 sm:py-8 flex-1">
           {/* Welcome Section */}
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-6 sm:mb-8">
-            <h1 className="text-2xl sm:text-3xl font-bold text-white mb-2">Welcome back, {user?.name?.split(" ")[0] || "Patient"}</h1>
-            <p className="text-gray-400 text-sm sm:text-base">Manage your medical funding applications and track your progress</p>
+            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">Welcome back, {user?.name?.split(" ")[0] || "Patient"}</h1>
+            <p className="text-gray-600 text-sm sm:text-base">Manage your medical funding applications and track your progress</p>
           </motion.div>
           {/* Application Modal */}
           <Dialog open={showApplyModal} onOpenChange={setShowApplyModal}>
@@ -347,43 +347,43 @@ export default function PatientDashboard() {
             transition={{ delay: 0.1 }}
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-6 sm:mb-8"
           >
-            <Card className="bg-gradient-to-br from-gray-900 to-gray-800 border-gray-700">
+            <Card className="bg-gradient-to-br from-blue-50 to-white border-blue-200 shadow-lg">
               <CardContent className="p-4 sm:p-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-gray-400 text-xs sm:text-sm">Total Applications</p>
-                    <p className="text-xl sm:text-2xl font-bold text-white">{stats.applications}</p>
+                    <p className="text-gray-600 text-xs sm:text-sm">Total Applications</p>
+                    <p className="text-xl sm:text-2xl font-bold text-gray-900">{stats.applications}</p>
                   </div>
-                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-blue-500/20 rounded-lg flex items-center justify-center">
-                    <FileText className="w-5 h-5 sm:w-6 sm:h-6 text-blue-400" />
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-blue-600/20 rounded-lg flex items-center justify-center">
+                    <FileText className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600" />
                   </div>
                 </div>
               </CardContent>
             </Card>
 
-            <Card className="bg-gradient-to-br from-gray-900 to-gray-800 border-gray-700">
+            <Card className="bg-gradient-to-br from-blue-50 to-white border-blue-200 shadow-lg">
               <CardContent className="p-4 sm:p-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-gray-400 text-xs sm:text-sm">Donations Received</p>
-                    <p className="text-xl sm:text-2xl font-bold text-white">${stats.donationsReceived.toLocaleString()}</p>
-                  </div>
-                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-green-500/20 rounded-lg flex items-center justify-center">
-                    <DollarSign className="w-5 h-5 sm:w-6 sm:h-6 text-green-400" />
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-gradient-to-br from-gray-900 to-gray-800 border-gray-700 sm:col-span-2 lg:col-span-1">
-              <CardContent className="p-4 sm:p-6">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-gray-400 text-xs sm:text-sm">Success Rate</p>
-                    <p className="text-xl sm:text-2xl font-bold text-white">85%</p>
+                    <p className="text-gray-600 text-xs sm:text-sm">Donations Received</p>
+                    <p className="text-xl sm:text-2xl font-bold text-gray-900">${stats.donationsReceived.toLocaleString()}</p>
                   </div>
                   <div className="w-10 h-10 sm:w-12 sm:h-12 bg-yellow-500/20 rounded-lg flex items-center justify-center">
-                    <CheckCircle className="w-5 h-5 sm:w-6 sm:h-6 text-yellow-400" />
+                    <DollarSign className="w-5 h-5 sm:w-6 sm:h-6 text-yellow-600" />
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-gradient-to-br from-blue-50 to-white border-blue-200 shadow-lg sm:col-span-2 lg:col-span-1">
+              <CardContent className="p-4 sm:p-6">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-gray-600 text-xs sm:text-sm">Success Rate</p>
+                    <p className="text-xl sm:text-2xl font-bold text-gray-900">85%</p>
+                  </div>
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-green-500/20 rounded-lg flex items-center justify-center">
+                    <CheckCircle className="w-5 h-5 sm:w-6 sm:h-6 text-green-600" />
                   </div>
                 </div>
               </CardContent>

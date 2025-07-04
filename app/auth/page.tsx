@@ -221,26 +221,26 @@ export default function AuthPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black text-white flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-50 text-gray-900 flex items-center justify-center p-4">
       <div className="w-full max-w-md">
         {/* Header */}
         <div className="text-center mb-8">
           <Link
             href="/"
-            className="inline-flex items-center text-gray-400 hover:text-yellow-400 transition-colors mb-4"
+            className="inline-flex items-center text-gray-600 hover:text-blue-600 transition-colors mb-4"
           >
             <ArrowLeft className="w-4 h-4 mr-2" />
             Back to Home
           </Link>
           <div className="flex items-center justify-center space-x-2 mb-4">
-            <div className="w-10 h-10 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-lg flex items-center justify-center">
-              <Heart className="w-6 h-6 text-black" />
+            <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-blue-700 rounded-lg flex items-center justify-center">
+              <Heart className="w-6 h-6 text-white" />
             </div>
-            <span className="text-3xl font-bold bg-gradient-to-r from-yellow-400 to-yellow-600 bg-clip-text text-transparent">
+            <span className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent">
               JUNKY
             </span>
           </div>
-          <p className="text-gray-400">Join the healthcare funding revolution</p>
+          <p className="text-gray-600">Join the healthcare funding revolution</p>
         </div>
 
         {/* Role Selection */}
@@ -251,7 +251,7 @@ export default function AuthPage() {
               {roleOptions.map((role) => (
                 <Card
                   key={role.value}
-                  className="bg-gray-900 border-gray-700 hover:border-yellow-400/50 cursor-pointer transition-all duration-300"
+                  className="bg-white border-gray-200 hover:border-blue-400/50 cursor-pointer transition-all duration-300 shadow-sm"
                   onClick={() => {
                     setSelectedRole(role.value)
                     setLoginData((prev) => ({ ...prev, role: role.value }))
@@ -264,8 +264,8 @@ export default function AuthPage() {
                     >
                       <role.icon className="w-6 h-6 text-white" />
                     </div>
-                    <h4 className="font-semibold text-white mb-1">{role.label}</h4>
-                    <p className="text-xs text-gray-400">{role.description}</p>
+                    <h4 className="font-semibold text-gray-900 mb-1">{role.label}</h4>
+                    <p className="text-xs text-gray-600">{role.description}</p>
                   </CardContent>
                 </Card>
               ))}
@@ -276,7 +276,7 @@ export default function AuthPage() {
         {/* Auth Forms */}
         {selectedRole && (
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-            <Card className="bg-gray-900 border-gray-700">
+            <Card className="bg-white border-gray-200 shadow-sm">
               <CardHeader className="text-center">
                 <div className="flex items-center justify-center mb-2">
                   {roleOptions.find((r) => r.value === selectedRole) && (
@@ -293,29 +293,29 @@ export default function AuthPage() {
                           return null
                         })()}
                       </div>
-                      <Badge className="bg-yellow-400/20 text-yellow-400 border-yellow-400/30">
+                      <Badge className="bg-blue-500/20 text-blue-600 border-blue-500/30">
                         {roleOptions.find((r) => r.value === selectedRole)?.label}
                       </Badge>
                     </>
                   )}
                 </div>
-                <CardTitle className="text-white">Welcome</CardTitle>
-                <CardDescription className="text-gray-400">
+                <CardTitle className="text-gray-900">Welcome</CardTitle>
+                <CardDescription className="text-gray-600">
                   {activeTab === "login" ? "Sign in to your account" : "Create your account"}
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <Tabs value={activeTab} onValueChange={setActiveTab}>
-                  <TabsList className="grid w-full grid-cols-2 bg-gray-800">
+                  <TabsList className="grid w-full grid-cols-2 bg-gray-100">
                     <TabsTrigger
                       value="login"
-                      className="data-[state=active]:bg-yellow-400 data-[state=active]:text-black"
+                      className="data-[state=active]:bg-blue-600 data-[state=active]:text-white"
                     >
                       Sign In
                     </TabsTrigger>
                     <TabsTrigger
                       value="register"
-                      className="data-[state=active]:bg-yellow-400 data-[state=active]:text-black"
+                      className="data-[state=active]:bg-blue-600 data-[state=active]:text-white"
                     >
                       Sign Up
                     </TabsTrigger>
@@ -330,7 +330,7 @@ export default function AuthPage() {
                   <TabsContent value="login">
                     <form onSubmit={handleLogin} className="space-y-4">
                       <div>
-                        <Label htmlFor="email" className="text-gray-300">
+                        <Label htmlFor="email" className="text-gray-700">
                           Email
                         </Label>
                         <Input
@@ -338,12 +338,12 @@ export default function AuthPage() {
                           type="email"
                           value={loginData.email}
                           onChange={(e) => setLoginData((prev) => ({ ...prev, email: e.target.value }))}
-                          className="bg-gray-800 border-gray-600 text-white"
+                          className="bg-white border-gray-300 text-gray-900"
                           required
                         />
                       </div>
                       <div>
-                        <Label htmlFor="password" className="text-gray-300">
+                        <Label htmlFor="password" className="text-gray-700">
                           Password
                         </Label>
                         <div className="relative">
@@ -352,13 +352,13 @@ export default function AuthPage() {
                             type={showPassword ? "text" : "password"}
                             value={loginData.password}
                             onChange={(e) => setLoginData((prev) => ({ ...prev, password: e.target.value }))}
-                            className="bg-gray-800 border-gray-600 text-white pr-10"
+                            className="bg-white border-gray-300 text-gray-900 pr-10"
                             required
                           />
                           <button
                             type="button"
                             onClick={() => setShowPassword(!showPassword)}
-                            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white"
+                            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700"
                           >
                             {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                           </button>
@@ -366,7 +366,7 @@ export default function AuthPage() {
                       </div>
                       <Button
                         type="submit"
-                        className="w-full bg-gradient-to-r from-yellow-400 to-yellow-600 text-black hover:from-yellow-500 hover:to-yellow-700 font-semibold"
+                        className="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white hover:from-blue-700 hover:to-blue-800 font-semibold"
                         disabled={loading}
                       >
                         {loading ? "Signing In..." : "Sign In"}
@@ -378,32 +378,32 @@ export default function AuthPage() {
                     <form onSubmit={handleRegister} className="space-y-4">
                       <div className="grid grid-cols-2 gap-4">
                         <div>
-                          <Label htmlFor="firstName" className="text-gray-300">
+                          <Label htmlFor="firstName" className="text-gray-700">
                             First Name
                           </Label>
                           <Input
                             id="firstName"
                             value={registerData.firstName}
                             onChange={(e) => setRegisterData((prev) => ({ ...prev, firstName: e.target.value }))}
-                            className="bg-gray-800 border-gray-600 text-white"
+                            className="bg-white border-gray-300 text-gray-900"
                             required
                           />
                         </div>
                         <div>
-                          <Label htmlFor="lastName" className="text-gray-300">
+                          <Label htmlFor="lastName" className="text-gray-700">
                             Last Name
                           </Label>
                           <Input
                             id="lastName"
                             value={registerData.lastName}
                             onChange={(e) => setRegisterData((prev) => ({ ...prev, lastName: e.target.value }))}
-                            className="bg-gray-800 border-gray-600 text-white"
+                            className="bg-white border-gray-300 text-gray-900"
                             required
                           />
                         </div>
                       </div>
                       <div>
-                        <Label htmlFor="email" className="text-gray-300">
+                        <Label htmlFor="email" className="text-gray-700">
                           Email
                         </Label>
                         <Input
@@ -411,24 +411,24 @@ export default function AuthPage() {
                           type="email"
                           value={registerData.email}
                           onChange={(e) => setRegisterData((prev) => ({ ...prev, email: e.target.value }))}
-                          className="bg-gray-800 border-gray-600 text-white"
+                          className="bg-white border-gray-300 text-gray-900"
                           required
                         />
                       </div>
                       <div>
-                        <Label htmlFor="phone" className="text-gray-300">
+                        <Label htmlFor="phone" className="text-gray-700">
                           Phone
                         </Label>
                         <Input
                           id="phone"
                           value={registerData.phone}
                           onChange={(e) => setRegisterData((prev) => ({ ...prev, phone: e.target.value }))}
-                          className="bg-gray-800 border-gray-600 text-white"
+                          className="bg-white border-gray-300 text-gray-900"
                           required
                         />
                       </div>
                       <div>
-                        <Label htmlFor="password" className="text-gray-300">
+                        <Label htmlFor="password" className="text-gray-700">
                           Password
                         </Label>
                         <div className="relative">
@@ -437,13 +437,13 @@ export default function AuthPage() {
                             type={showPassword ? "text" : "password"}
                             value={registerData.password}
                             onChange={(e) => setRegisterData((prev) => ({ ...prev, password: e.target.value }))}
-                            className="bg-gray-800 border-gray-600 text-white pr-10"
+                            className="bg-white border-gray-300 text-gray-900 pr-10"
                             required
                           />
                           <button
                             type="button"
                             onClick={() => setShowPassword(!showPassword)}
-                            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white"
+                            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700"
                           >
                             {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                           </button>
@@ -451,7 +451,7 @@ export default function AuthPage() {
                       </div>
                       <Button
                         type="submit"
-                        className="w-full bg-gradient-to-r from-yellow-400 to-yellow-600 text-black hover:from-yellow-500 hover:to-yellow-700 font-semibold"
+                        className="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white hover:from-blue-700 hover:to-blue-800 font-semibold"
                         disabled={loading}
                       >
                         {loading ? "Creating Account..." : "Create Account"}

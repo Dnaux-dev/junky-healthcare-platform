@@ -178,9 +178,13 @@ export default function AdminDashboard() {
     if (!token) return
     setActionLoading(id + "-approve")
     try {
-      const res = await fetch(`${API_BASE_URL}/api/admin/applications/${id}/approve`, {
-        method: "POST",
-        headers: { Authorization: `Bearer ${token}` },
+      const res = await fetch(`${API_BASE_URL}/api/admin/applications/${id}`, {
+        method: "PATCH",
+        headers: { 
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ status: "approved" })
       })
       if (res.ok) {
         setApplications(applications => applications.map(app => app._id === id ? { ...app, status: "approved" } : app))
@@ -194,12 +198,16 @@ export default function AdminDashboard() {
     if (!token) return
     setActionLoading(id + "-decline")
     try {
-      const res = await fetch(`${API_BASE_URL}/api/admin/applications/${id}/decline`, {
-        method: "POST",
-        headers: { Authorization: `Bearer ${token}` },
+      const res = await fetch(`${API_BASE_URL}/api/admin/applications/${id}`, {
+        method: "PATCH",
+        headers: { 
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ status: "declined" })
       })
       if (res.ok) {
-        setApplications(applications => applications.map(app => app._id === id ? { ...app, status: "rejected" } : app))
+        setApplications(applications => applications.map(app => app._id === id ? { ...app, status: "declined" } : app))
       }
     } finally {
       setActionLoading(null)
@@ -250,22 +258,22 @@ export default function AdminDashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black text-white">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-50 text-gray-900">
       {/* Header */}
-      <header className="border-b border-gray-800 bg-black/50 backdrop-blur-md">
+      <header className="border-b border-blue-200 bg-white/95 backdrop-blur-md shadow-sm">
         <div className="container mx-auto px-4 sm:px-6 py-4">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-4 sm:space-y-0">
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-4">
                 <Link href="/" className="flex items-center space-x-2">
-                  <div className="w-8 h-8 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-lg flex items-center justify-center">
-                    <Shield className="w-5 h-5 text-black" />
+                  <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-blue-700 rounded-lg flex items-center justify-center">
+                    <Shield className="w-5 h-5 text-white" />
                   </div>
-                  <span className="text-xl font-bold bg-gradient-to-r from-yellow-400 to-yellow-600 bg-clip-text text-transparent">
+                  <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent">
                     JUNKY
                   </span>
                 </Link>
-                <Badge className="bg-purple-500/20 text-purple-400 border-purple-500/30">Admin Dashboard</Badge>
+                <Badge className="bg-purple-500/20 text-purple-600 border-purple-500/30">Admin Dashboard</Badge>
               </div>
             </div>
             <div className="flex items-center space-x-2 sm:space-x-4">
@@ -279,7 +287,7 @@ export default function AdminDashboard() {
                 <div className="w-8 h-8 bg-gradient-to-r from-purple-500 to-purple-600 rounded-full flex items-center justify-center">
                   <User className="w-4 h-4 text-white" />
                 </div>
-                <span className="text-sm text-gray-300 hidden sm:block">{user?.name || "Admin"}</span>
+                <span className="text-sm text-gray-600 hidden sm:block">{user?.name || "Admin"}</span>
               </div>
               <Button variant="ghost" size="sm" onClick={handleLogout}>
                 <LogOut className="w-4 h-4" />
@@ -292,8 +300,8 @@ export default function AdminDashboard() {
       <div className="container mx-auto px-4 sm:px-6 py-4 sm:py-8">
         {/* Welcome Section */}
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-6 sm:mb-8">
-          <h1 className="text-2xl sm:text-3xl font-bold text-white mb-2">System Administration</h1>
-          <p className="text-gray-400 text-sm sm:text-base">Monitor platform performance and manage system operations</p>
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">System Administration</h1>
+          <p className="text-gray-600 text-sm sm:text-base">Monitor platform performance and manage system operations</p>
         </motion.div>
 
         {/* System Health */}
@@ -303,31 +311,31 @@ export default function AdminDashboard() {
           transition={{ delay: 0.1 }}
           className="mb-6 sm:mb-8"
         >
-          <Card className="bg-gradient-to-br from-gray-900 to-gray-800 border-gray-700">
+          <Card className="bg-white border-gray-200 shadow-sm">
             <CardHeader>
-              <CardTitle className="text-white flex items-center">
-                <Activity className="w-5 h-5 text-green-400 mr-2" />
+              <CardTitle className="text-gray-900 flex items-center">
+                <Activity className="w-5 h-5 text-green-600 mr-2" />
                 Platform Health
               </CardTitle>
             </CardHeader>
             <CardContent>
               <div className="flex items-center justify-between mb-2">
-                <span className="text-gray-400 text-sm sm:text-base">Overall System Status</span>
-                <span className="text-green-400 font-semibold">{systemStats.platformHealth}%</span>
+                <span className="text-gray-600 text-sm sm:text-base">Overall System Status</span>
+                <span className="text-green-600 font-semibold">{systemStats.platformHealth}%</span>
               </div>
-              <Progress value={systemStats.platformHealth} className="h-3 bg-gray-700" />
+              <Progress value={systemStats.platformHealth} className="h-3 bg-gray-200" />
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-4">
                 <div className="text-center">
-                  <div className="text-green-400 font-semibold text-sm sm:text-base">API</div>
-                  <div className="text-xs sm:text-sm text-gray-400">Operational</div>
+                  <div className="text-green-600 font-semibold text-sm sm:text-base">API</div>
+                  <div className="text-xs sm:text-sm text-gray-600">Operational</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-green-400 font-semibold text-sm sm:text-base">Database</div>
-                  <div className="text-xs sm:text-sm text-gray-400">Healthy</div>
+                  <div className="text-green-600 font-semibold text-sm sm:text-base">Database</div>
+                  <div className="text-xs sm:text-sm text-gray-600">Healthy</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-green-400 font-semibold text-sm sm:text-base">Blockchain</div>
-                  <div className="text-xs sm:text-sm text-gray-400">Synced</div>
+                  <div className="text-green-600 font-semibold text-sm sm:text-base">Blockchain</div>
+                  <div className="text-xs sm:text-sm text-gray-600">Synced</div>
                 </div>
               </div>
             </CardContent>
@@ -341,57 +349,57 @@ export default function AdminDashboard() {
           transition={{ delay: 0.2 }}
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-6 sm:mb-8"
         >
-          <Card className="bg-gradient-to-br from-gray-900 to-gray-800 border-gray-700">
+          <Card className="bg-white border-gray-200 shadow-sm">
             <CardContent className="p-4 sm:p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-gray-400 text-xs sm:text-sm">Total Users</p>
-                  <p className="text-xl sm:text-2xl font-bold text-white">{systemStats.totalUsers.toLocaleString()}</p>
+                  <p className="text-gray-600 text-xs sm:text-sm">Total Users</p>
+                  <p className="text-xl sm:text-2xl font-bold text-gray-900">{systemStats.totalUsers.toLocaleString()}</p>
                 </div>
-                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-blue-500/20 rounded-lg flex items-center justify-center">
-                  <Users className="w-5 h-5 sm:w-6 sm:h-6 text-blue-400" />
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                  <Users className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600" />
                 </div>
               </div>
             </CardContent>
           </Card>
 
-          <Card className="bg-gradient-to-br from-gray-900 to-gray-800 border-gray-700">
+          <Card className="bg-white border-gray-200 shadow-sm">
             <CardContent className="p-4 sm:p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-gray-400 text-xs sm:text-sm">Partner Hospitals</p>
-                  <p className="text-xl sm:text-2xl font-bold text-white">{systemStats.totalHospitals}</p>
+                  <p className="text-gray-600 text-xs sm:text-sm">Partner Hospitals</p>
+                  <p className="text-xl sm:text-2xl font-bold text-gray-900">{systemStats.totalHospitals}</p>
                 </div>
-                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-green-500/20 rounded-lg flex items-center justify-center">
-                  <Building2 className="w-5 h-5 sm:w-6 sm:h-6 text-green-400" />
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-green-100 rounded-lg flex items-center justify-center">
+                  <Building2 className="w-5 h-5 sm:w-6 sm:h-6 text-green-600" />
                 </div>
               </div>
             </CardContent>
           </Card>
 
-          <Card className="bg-gradient-to-br from-gray-900 to-gray-800 border-gray-700">
+          <Card className="bg-white border-gray-200 shadow-sm">
             <CardContent className="p-4 sm:p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-gray-400 text-xs sm:text-sm">Total Funding</p>
-                  <p className="text-xl sm:text-2xl font-bold text-white">${(systemStats.totalFunding / 1000000).toFixed(1)}M</p>
+                  <p className="text-gray-600 text-xs sm:text-sm">Total Funding</p>
+                  <p className="text-xl sm:text-2xl font-bold text-gray-900">${(systemStats.totalFunding / 1000000).toFixed(1)}M</p>
                 </div>
-                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-yellow-500/20 rounded-lg flex items-center justify-center">
-                  <DollarSign className="w-5 h-5 sm:w-6 sm:h-6 text-yellow-400" />
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-yellow-100 rounded-lg flex items-center justify-center">
+                  <DollarSign className="w-5 h-5 sm:w-6 sm:h-6 text-yellow-600" />
                 </div>
               </div>
             </CardContent>
           </Card>
 
-          <Card className="bg-gradient-to-br from-gray-900 to-gray-800 border-gray-700">
+          <Card className="bg-white border-gray-200 shadow-sm">
             <CardContent className="p-4 sm:p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-gray-400 text-xs sm:text-sm">Success Rate</p>
-                  <p className="text-xl sm:text-2xl font-bold text-white">{systemStats.successRate}%</p>
+                  <p className="text-gray-600 text-xs sm:text-sm">Success Rate</p>
+                  <p className="text-xl sm:text-2xl font-bold text-gray-900">{systemStats.successRate}%</p>
                 </div>
-                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-purple-500/20 rounded-lg flex items-center justify-center">
-                  <TrendingUp className="w-5 h-5 sm:w-6 sm:h-6 text-purple-400" />
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-purple-100 rounded-lg flex items-center justify-center">
+                  <TrendingUp className="w-5 h-5 sm:w-6 sm:h-6 text-purple-600" />
                 </div>
               </div>
             </CardContent>
@@ -401,20 +409,20 @@ export default function AdminDashboard() {
         {/* Main Content */}
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}>
           <Tabs defaultValue="overview" className="space-y-4 sm:space-y-6">
-            <TabsList className="bg-gray-800 border-gray-700">
-              <TabsTrigger value="overview" className="data-[state=active]:bg-yellow-400 data-[state=active]:text-black">
+            <TabsList className="bg-white border-gray-200">
+              <TabsTrigger value="overview" className="data-[state=active]:bg-blue-600 data-[state=active]:text-white">
                 System Overview
               </TabsTrigger>
-              <TabsTrigger value="applications" className="data-[state=active]:bg-yellow-400 data-[state=active]:text-black">
+              <TabsTrigger value="applications" className="data-[state=active]:bg-blue-600 data-[state=active]:text-white">
                 Applications
               </TabsTrigger>
-              <TabsTrigger value="users" className="data-[state=active]:bg-yellow-400 data-[state=active]:text-black">
+              <TabsTrigger value="users" className="data-[state=active]:bg-blue-600 data-[state=active]:text-white">
                 User Management
               </TabsTrigger>
-              <TabsTrigger value="hospitals" className="data-[state=active]:bg-yellow-400 data-[state=active]:text-black">
+              <TabsTrigger value="hospitals" className="data-[state=active]:bg-blue-600 data-[state=active]:text-white">
                 Hospital Verification
               </TabsTrigger>
-              <TabsTrigger value="analytics" className="data-[state=active]:bg-yellow-400 data-[state=active]:text-black">
+              <TabsTrigger value="analytics" className="data-[state=active]:bg-blue-600 data-[state=active]:text-white">
                 Analytics
               </TabsTrigger>
             </TabsList>
@@ -422,24 +430,24 @@ export default function AdminDashboard() {
             <TabsContent value="overview" className="space-y-6">
               <div className="grid lg:grid-cols-2 gap-6">
                 {/* Recent Activity */}
-                <Card className="bg-gradient-to-br from-gray-900 to-gray-800 border-gray-700">
+                <Card className="bg-white border-gray-200 shadow-sm">
                   <CardHeader>
-                    <CardTitle className="text-white">Recent Activity</CardTitle>
-                    <CardDescription className="text-gray-400">
+                    <CardTitle className="text-gray-900">Recent Activity</CardTitle>
+                    <CardDescription className="text-gray-600">
                       Latest platform activities and transactions
                     </CardDescription>
                   </CardHeader>
                   <CardContent className="space-y-4">
                     {recentActivity.map((activity) => (
-                      <div key={activity.id} className="flex items-center space-x-3 p-3 bg-gray-800/50 rounded-lg">
+                      <div key={activity.id} className="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg">
                         <div
                           className={`w-8 h-8 rounded-full flex items-center justify-center ${getActivityColor(activity.status)} bg-current/20`}
                         >
                           {getActivityIcon(activity.type)}
                         </div>
                         <div className="flex-1">
-                          <p className="text-white text-sm">{activity.message}</p>
-                          <p className="text-gray-400 text-xs">
+                          <p className="text-gray-900 text-sm">{activity.message}</p>
+                          <p className="text-gray-600 text-xs">
                             {activity.user} • {activity.timestamp}
                           </p>
                         </div>
@@ -452,29 +460,29 @@ export default function AdminDashboard() {
                 </Card>
 
                 {/* System Metrics */}
-                <Card className="bg-gradient-to-br from-gray-900 to-gray-800 border-gray-700">
+                <Card className="bg-white border-gray-200 shadow-sm">
                   <CardHeader>
-                    <CardTitle className="text-white">Key Metrics</CardTitle>
-                    <CardDescription className="text-gray-400">
+                    <CardTitle className="text-gray-900">Key Metrics</CardTitle>
+                    <CardDescription className="text-gray-600">
                       Important platform performance indicators
                     </CardDescription>
                   </CardHeader>
                   <CardContent className="space-y-4">
                     <div className="flex items-center justify-between">
-                      <span className="text-gray-400">Active Applications</span>
-                      <span className="text-white font-semibold">{systemStats.activeApplications}</span>
+                      <span className="text-gray-600">Active Applications</span>
+                      <span className="text-gray-900 font-semibold">{systemStats.activeApplications}</span>
                     </div>
                     <div className="flex items-center justify-between">
-                      <span className="text-gray-400">Daily Donations</span>
-                      <span className="text-green-400 font-semibold">$12,450</span>
+                      <span className="text-gray-600">Daily Donations</span>
+                      <span className="text-green-600 font-semibold">$12,450</span>
                     </div>
                     <div className="flex items-center justify-between">
-                      <span className="text-gray-400">New Registrations</span>
-                      <span className="text-blue-400 font-semibold">47</span>
+                      <span className="text-gray-600">New Registrations</span>
+                      <span className="text-blue-600 font-semibold">47</span>
                     </div>
                     <div className="flex items-center justify-between">
-                      <span className="text-gray-400">Pending Verifications</span>
-                      <span className="text-yellow-400 font-semibold">23</span>
+                      <span className="text-gray-600">Pending Verifications</span>
+                      <span className="text-yellow-600 font-semibold">23</span>
                     </div>
                   </CardContent>
                 </Card>
@@ -482,16 +490,16 @@ export default function AdminDashboard() {
             </TabsContent>
 
             <TabsContent value="applications" className="space-y-6">
-              <h2 className="text-2xl font-bold text-white">Applications</h2>
+              <h2 className="text-2xl font-bold text-gray-900">Applications</h2>
               {dataLoading ? (
-                <div className="text-gray-400">Loading applications...</div>
+                <div className="text-gray-600">Loading applications...</div>
               ) : dataError ? (
-                <div className="text-red-400">{dataError}</div>
+                <div className="text-red-600">{dataError}</div>
               ) : (
-                <div className="overflow-x-auto">
+                <div className="overflow-x-auto bg-white rounded-lg border border-gray-200">
                   <table className="min-w-full text-sm text-left">
                     <thead>
-                      <tr className="bg-gray-800 text-gray-400">
+                      <tr className="bg-gray-50 text-gray-700">
                         <th className="p-2">Title</th>
                         <th className="p-2">Amount</th>
                         <th className="p-2">Urgency</th>
@@ -503,24 +511,24 @@ export default function AdminDashboard() {
                     </thead>
                     <tbody>
                       {applications.map(app => (
-                        <tr key={app._id} className="border-b border-gray-700">
-                          <td className="p-2 text-white">{app.title}</td>
-                          <td className="p-2 text-white">${app.amount.toLocaleString()}</td>
+                        <tr key={app._id} className="border-b border-gray-200">
+                          <td className="p-2 text-gray-900">{app.title}</td>
+                          <td className="p-2 text-gray-900">${app.amount.toLocaleString()}</td>
                           <td className="p-2">
-                            <span className="px-2 py-1 rounded text-xs font-semibold bg-yellow-500/20 text-yellow-400 border-yellow-500/30">
+                            <span className="px-2 py-1 rounded text-xs font-semibold bg-yellow-100 text-yellow-800 border-yellow-200">
                               {app.urgency}
                             </span>
                           </td>
                           <td className="p-2">
-                            <span className={`px-2 py-1 rounded text-xs font-semibold ${app.status === "approved" ? "bg-green-500/20 text-green-400 border-green-500/30" : app.status === "rejected" ? "bg-red-500/20 text-red-400 border-red-500/30" : "bg-yellow-500/20 text-yellow-400 border-yellow-500/30"}`}>{app.status}</span>
+                            <span className={`px-2 py-1 rounded text-xs font-semibold ${app.status === "approved" ? "bg-green-100 text-green-800 border-green-200" : app.status === "declined" ? "bg-red-100 text-red-800 border-red-200" : "bg-yellow-100 text-yellow-800 border-yellow-200"}`}>{app.status}</span>
                           </td>
-                          <td className="p-2 text-white">{app.patient?.firstName || app.patient?.name || "-"}</td>
-                          <td className="p-2 text-white">{new Date(app.createdAt).toLocaleDateString()}</td>
+                          <td className="p-2 text-gray-900">{app.patient?.firstName || app.patient?.name || "-"}</td>
+                          <td className="p-2 text-gray-900">{new Date(app.createdAt).toLocaleDateString()}</td>
                           <td className="p-2">
                             <Button size="sm" variant="outline" className="mr-2" disabled={actionLoading === app._id + "-approve" || app.status === "approved"} onClick={() => handleApprove(app._id)}>
                               {actionLoading === app._id + "-approve" ? "Approving..." : "Approve"}
                             </Button>
-                            <Button size="sm" variant="destructive" disabled={actionLoading === app._id + "-decline" || app.status === "rejected"} onClick={() => handleDecline(app._id)}>
+                            <Button size="sm" variant="destructive" disabled={actionLoading === app._id + "-decline" || app.status === "declined"} onClick={() => handleDecline(app._id)}>
                               {actionLoading === app._id + "-decline" ? "Declining..." : "Decline"}
                             </Button>
                           </td>
@@ -533,17 +541,17 @@ export default function AdminDashboard() {
             </TabsContent>
 
             <TabsContent value="users" className="space-y-6">
-              <h2 className="text-2xl font-bold text-white">User Management</h2>
+              <h2 className="text-2xl font-bold text-gray-900">User Management</h2>
               {dataLoading ? (
-                <div className="text-gray-400">Loading users...</div>
+                <div className="text-gray-600">Loading users...</div>
               ) : dataError ? (
-                <div className="text-red-400">{dataError}</div>
+                <div className="text-red-600">{dataError}</div>
               ) : (
                 <div className="grid md:grid-cols-2 gap-6">
-                  <Card className="bg-gradient-to-br from-gray-900 to-gray-800 border-gray-700">
+                  <Card className="bg-white border-gray-200 shadow-sm">
                     <CardHeader>
-                      <CardTitle className="text-white flex items-center">
-                        <Users className="w-5 h-5 text-red-400 mr-2" />
+                      <CardTitle className="text-gray-900 flex items-center">
+                        <Users className="w-5 h-5 text-red-600 mr-2" />
                         Patients
                       </CardTitle>
                     </CardHeader>
@@ -551,7 +559,7 @@ export default function AdminDashboard() {
                       <div className="overflow-x-auto">
                         <table className="min-w-full text-sm text-left">
                           <thead>
-                            <tr className="bg-gray-800 text-gray-400">
+                            <tr className="bg-gray-50 text-gray-700">
                               <th className="p-2">Name</th>
                               <th className="p-2">Email</th>
                               <th className="p-2">Phone</th>
@@ -559,10 +567,10 @@ export default function AdminDashboard() {
                           </thead>
                           <tbody>
                             {patients.map(p => (
-                              <tr key={p._id} className="border-b border-gray-700">
-                                <td className="p-2 text-white">{p.firstName} {p.lastName}</td>
-                                <td className="p-2 text-white">{p.email}</td>
-                                <td className="p-2 text-white">{p.phone || "-"}</td>
+                              <tr key={p._id} className="border-b border-gray-200">
+                                <td className="p-2 text-gray-900">{p.firstName} {p.lastName}</td>
+                                <td className="p-2 text-gray-900">{p.email}</td>
+                                <td className="p-2 text-gray-900">{p.phone || "-"}</td>
                               </tr>
                             ))}
                           </tbody>
@@ -570,10 +578,10 @@ export default function AdminDashboard() {
                       </div>
                     </CardContent>
                   </Card>
-                  <Card className="bg-gradient-to-br from-gray-900 to-gray-800 border-gray-700">
+                  <Card className="bg-white border-gray-200 shadow-sm">
                     <CardHeader>
-                      <CardTitle className="text-white flex items-center">
-                        <Users className="w-5 h-5 text-blue-400 mr-2" />
+                      <CardTitle className="text-gray-900 flex items-center">
+                        <Users className="w-5 h-5 text-blue-600 mr-2" />
                         Donors
                       </CardTitle>
                     </CardHeader>
@@ -581,7 +589,7 @@ export default function AdminDashboard() {
                       <div className="overflow-x-auto">
                         <table className="min-w-full text-sm text-left">
                           <thead>
-                            <tr className="bg-gray-800 text-gray-400">
+                            <tr className="bg-gray-50 text-gray-700">
                               <th className="p-2">Name</th>
                               <th className="p-2">Email</th>
                               <th className="p-2">Phone</th>
@@ -589,10 +597,10 @@ export default function AdminDashboard() {
                           </thead>
                           <tbody>
                             {donors.map(d => (
-                              <tr key={d._id} className="border-b border-gray-700">
-                                <td className="p-2 text-white">{d.firstName} {d.lastName}</td>
-                                <td className="p-2 text-white">{d.email}</td>
-                                <td className="p-2 text-white">{d.phone || "-"}</td>
+                              <tr key={d._id} className="border-b border-gray-200">
+                                <td className="p-2 text-gray-900">{d.firstName} {d.lastName}</td>
+                                <td className="p-2 text-gray-900">{d.email}</td>
+                                <td className="p-2 text-gray-900">{d.phone || "-"}</td>
                               </tr>
                             ))}
                           </tbody>
@@ -605,16 +613,16 @@ export default function AdminDashboard() {
             </TabsContent>
 
             <TabsContent value="hospitals" className="space-y-6">
-              <h2 className="text-2xl font-bold text-white">Hospital Management</h2>
+              <h2 className="text-2xl font-bold text-gray-900">Hospital Management</h2>
               {dataLoading ? (
-                <div className="text-gray-400">Loading hospitals...</div>
+                <div className="text-gray-600">Loading hospitals...</div>
               ) : dataError ? (
-                <div className="text-red-400">{dataError}</div>
+                <div className="text-red-600">{dataError}</div>
               ) : (
-                <Card className="bg-gradient-to-br from-gray-900 to-gray-800 border-gray-700">
+                <Card className="bg-white border-gray-200 shadow-sm">
                   <CardHeader>
-                    <CardTitle className="text-white flex items-center">
-                      <Building2 className="w-5 h-5 text-green-400 mr-2" />
+                    <CardTitle className="text-gray-900 flex items-center">
+                      <Building2 className="w-5 h-5 text-green-600 mr-2" />
                       Hospitals
                     </CardTitle>
                   </CardHeader>
@@ -622,7 +630,7 @@ export default function AdminDashboard() {
                     <div className="overflow-x-auto">
                       <table className="min-w-full text-sm text-left">
                         <thead>
-                          <tr className="bg-gray-800 text-gray-400">
+                          <tr className="bg-gray-50 text-gray-700">
                             <th className="p-2">Name</th>
                             <th className="p-2">Email</th>
                             <th className="p-2">Verified</th>
@@ -630,11 +638,11 @@ export default function AdminDashboard() {
                         </thead>
                         <tbody>
                           {hospitals.map(h => (
-                            <tr key={h._id} className="border-b border-gray-700">
-                              <td className="p-2 text-white">{h.name}</td>
-                              <td className="p-2 text-white">{h.email}</td>
+                            <tr key={h._id} className="border-b border-gray-200">
+                              <td className="p-2 text-gray-900">{h.name}</td>
+                              <td className="p-2 text-gray-900">{h.email}</td>
                               <td className="p-2">
-                                <span className={`px-2 py-1 rounded text-xs font-semibold ${h.verified ? "bg-green-500/20 text-green-400 border-green-500/30" : "bg-yellow-500/20 text-yellow-400 border-yellow-500/30"}`}>{h.verified ? "Verified" : "Pending"}</span>
+                                <span className={`px-2 py-1 rounded text-xs font-semibold ${h.verified ? "bg-green-100 text-green-800 border-green-200" : "bg-yellow-100 text-yellow-800 border-yellow-200"}`}>{h.verified ? "Verified" : "Pending"}</span>
                               </td>
                             </tr>
                           ))}
@@ -647,10 +655,10 @@ export default function AdminDashboard() {
             </TabsContent>
 
             <TabsContent value="analytics" className="space-y-6">
-              <h2 className="text-2xl font-bold text-white">Platform Analytics</h2>
+              <h2 className="text-2xl font-bold text-gray-900">Platform Analytics</h2>
               {/* Example chart: Application status breakdown */}
-              <div className="bg-gray-900 rounded-lg p-6">
-                <h3 className="text-lg font-semibold text-white mb-4">Application Status Breakdown</h3>
+              <div className="bg-white rounded-lg p-6 border border-gray-200 shadow-sm">
+                <h3 className="text-lg font-semibold text-gray-900 mb-4">Application Status Breakdown</h3>
                 <div className="flex items-center space-x-8">
                   {(() => {
                     const statusCounts: Record<string, number> = {}
@@ -660,8 +668,8 @@ export default function AdminDashboard() {
                     const total = applications.length || 1
                     return Object.entries(statusCounts).map(([status, count]) => (
                       <div key={status} className="flex flex-col items-center">
-                        <span className="text-2xl font-bold text-white">{Math.round((count / total) * 100)}%</span>
-                        <span className="text-gray-400 text-sm capitalize">{status}</span>
+                        <span className="text-2xl font-bold text-gray-900">{Math.round((count / total) * 100)}%</span>
+                        <span className="text-gray-600 text-sm capitalize">{status}</span>
                       </div>
                     ))
                   })()}

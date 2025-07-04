@@ -179,40 +179,41 @@ export default function HospitalDashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black text-white">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-50 text-gray-900">
       {/* Header */}
-      <header className="border-b border-gray-800 bg-black/50 backdrop-blur-md">
+      <header className="border-b border-blue-200 bg-white/95 backdrop-blur-md shadow-sm">
         <div className="container mx-auto px-4 sm:px-6 py-4">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-4 sm:space-y-0">
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-4">
                 <Link href="/" className="flex items-center space-x-2">
-                  <div className="w-8 h-8 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-lg flex items-center justify-center">
-                    <Building2 className="w-5 h-5 text-black" />
+                  <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-blue-700 rounded-lg flex items-center justify-center">
+                    <Building2 className="w-5 h-5 text-white" />
                   </div>
-                  <span className="text-xl font-bold bg-gradient-to-r from-yellow-400 to-yellow-600 bg-clip-text text-transparent">
+                  <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent">
                     JUNKY
                   </span>
                 </Link>
-                <Badge className="bg-green-500/20 text-green-400 border-green-500/30">Hospital Dashboard</Badge>
+                <Badge className="bg-green-500/20 text-green-600 border-green-500/30">Hospital Dashboard</Badge>
               </div>
             </div>
             <div className="flex items-center space-x-2 sm:space-x-4">
-            <Button variant="ghost" size="sm">
-              <Bell className="w-4 h-4" />
-            </Button>
-            <Button variant="ghost" size="sm">
-              <Settings className="w-4 h-4" />
-            </Button>
-            <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-gradient-to-r from-green-500 to-green-600 rounded-full flex items-center justify-center">
-                <User className="w-4 h-4 text-white" />
+              <Button variant="ghost" size="sm">
+                <Bell className="w-4 h-4" />
+              </Button>
+              <Button variant="ghost" size="sm">
+                <Settings className="w-4 h-4" />
+              </Button>
+              <div className="flex items-center space-x-2">
+                <div className="w-8 h-8 bg-gradient-to-r from-green-500 to-green-600 rounded-full flex items-center justify-center">
+                  <User className="w-4 h-4 text-white" />
+                </div>
+                <span className="text-sm text-gray-600">{user?.name || "Hospital"}</span>
               </div>
-              <span className="text-sm text-gray-300">{user?.name || "Hospital"}</span>
+              <Button variant="ghost" size="sm" onClick={handleLogout}>
+                <LogOut className="w-4 h-4" />
+              </Button>
             </div>
-            <Button variant="ghost" size="sm" onClick={handleLogout}>
-              <LogOut className="w-4 h-4" />
-            </Button>
           </div>
         </div>
       </header>
@@ -220,8 +221,8 @@ export default function HospitalDashboard() {
       <div className="container mx-auto px-4 sm:px-6 py-4 sm:py-8">
         {/* Welcome Section */}
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-6 sm:mb-8">
-          <h1 className="text-2xl sm:text-3xl font-bold text-white mb-2">Hospital Management Portal</h1>
-          <p className="text-gray-400 text-sm sm:text-base">Verify patient applications and manage treatment funding</p>
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">Hospital Management Portal</h1>
+          <p className="text-gray-600 text-sm sm:text-base">Verify patient applications and manage treatment funding</p>
         </motion.div>
 
         {/* Stats Cards */}
